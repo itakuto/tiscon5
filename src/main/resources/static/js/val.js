@@ -76,4 +76,10 @@ $(function(){
         err.insertAfter(elem);
     }
   });
+  $("#box").change(function(){
+    var $cap = 200 - $("#bed").val()*20 + $("#bicycle").val()*15 +$("#washingMachine").val()*10;
+      if($("#box").val() > $cap){
+        $("#box_cap").text("*上記の荷物の場合、使えるダンボールの上限は"+$cap+"個です");
+      }
+  });
 });
