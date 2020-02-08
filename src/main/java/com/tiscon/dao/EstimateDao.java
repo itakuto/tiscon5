@@ -166,6 +166,7 @@ public class EstimateDao {
         for(int i = 0; i < ret.size(); ++i){
             if(ret.get(i).equals(userOrderForm.getOldAddress())){
                 check = false;
+                break;
             }
         }
 
