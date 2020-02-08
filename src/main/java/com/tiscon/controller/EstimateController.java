@@ -35,6 +35,7 @@ public class EstimateController {
         this.estimateService = estimateService;
     }
 
+
     @GetMapping("")
     String index(Model model) {
         return "top";

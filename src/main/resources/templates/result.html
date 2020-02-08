@@ -8,15 +8,38 @@
   <link rel="stylesheet" th:href="@{http://fonts.googleapis.com/css?family=Exo:900}"
         href="http://fonts.googleapis.com/css?family=Exo:900"/>
   <link rel="stylesheet" th:href="@{/css/main.css}" href="../static/css/main.css">
+  <style>
+    .popup{
+    }
+    .popup .popuptext{
+    }
+    .popup .popuptext::after{
+    }
+    .popup .show{
+    }
+
+  </style>
+
+  <script>
+    function popupShow(price){
+      window.alert('見積結果は'+　price + 'です。');
+    }
+
+  </script>
 </head>
 
 <body>
 <nav th:insert="header.html :: header"></nav>
 <div class="container">
+
   <form th:action="@{/order}" th:object="${userOrderForm}" class="form-horizontal" method="post">
-    <h1>概算お見積り結果</h1>
+    <h1>概算お見積り結果</h1><br>
     <div class="col-sm-12">
-      <h2>概算お見積り結果は<span th:text="${price}"></span>円です。</h2>
+      <p>
+      <h2>概算お見積り結果は</h2><br>
+        <h1>　　<span th:text="${price}"></span>円</h1>
+     </p>
+      <br>
       <h4>個人情報</h4>
       <table class="table table-bordered">
         <col span="1" style="background-color: #A9B7C7;">
