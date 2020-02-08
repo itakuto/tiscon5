@@ -11,6 +11,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,11 +73,59 @@ public class EstimateService {
      */
     public Integer getPrice(UserOrderDto dto) {
         double distance = estimateDAO.getDistance(dto.getOldPrefectureId(), dto.getNewPrefectureId());
+
+        //同一県であった場合(distanse == 0の場合)
+        String oldAdd; //昔の住所
+        String newAdd; //新しい住所
+        oldAdd = dto.getOldAddress();
+        newAdd = dto.getNewAddress();
+        int i;
+        int judge;//判定変数
+
+        //市区町村の取り出し
+        String town;
+        String[] townType = {"市", "区", "町", "村"};
+        for(i = 0; i < 4; i++) {
+            judge = oldAdd.indexOf(townType[i]);
+            if (judge != -1) {
+                oldAdd = oldAdd.substring(0,judge);
+                break;
+            }
+        }
+        for(i = 0; i < 4; i++) {
+            judge = newAdd.indexOf(townType[i]);
+            if (judge != -1) {
+                newAdd = newAdd.substring(0,judge);
+                break;
+            }
+        }
+        if(distance == 0){//同じ県のとき
+            if(oldAdd.equals(newAdd)) {//同じ市区町村のときは距離考慮無しくらいがちょうどいい
+
+            }else{//違う市区町村であるときに限り、料金を設定。(面積の大きさでもう少し細分化するかも)
+                distance = 20;
+            }
+        }
+
+
         // 小数点以下を切り捨てる
         int distanceInt = (int) Math.floor(distance);
 
         // 距離当たりの料金を算出する
         int priceForDistance = distanceInt * PRICE_PER_DISTANCE;
+
+        //要らないかもだけど、繫盛期かの判定
+//        Calendar calendar = Calendar.getInstance();
+//
+//        int month;
+//        month = calendar.get(Calendar.MONTH);
+//        double busy;
+//
+//        if(month == 2 || month == 3 || month == 4){
+//            busy = 1.8;
+//        }else{
+//            busy = 1.0;
+//        }
 
         int boxes = getBoxForPackage(dto.getBox(), PackageType.BOX)
                 + getBoxForPackage(dto.getBed(), PackageType.BED)
@@ -91,8 +141,10 @@ public class EstimateService {
         if (dto.getWashingMachineInstallation()) {
             priceForOptionalService = estimateDAO.getPricePerOptionalService(OptionalServiceType.WASHING_MACHINE.getCode());
         }
-
-        return priceForDistance + pricePerTruck + priceForOptionalService;
+        //承認必要かな
+//        int totalPrice =(int)(busy * (priceForDistance + pricePerTruck + priceForOptionalService));
+        int totalPrice = priceForDistance + pricePerTruck + priceForOptionalService;
+        return totalPrice;
     }
 
     /**

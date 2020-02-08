@@ -2,6 +2,7 @@ package com.tiscon.dao;
 
 import com.tiscon.domain.*;
 import com.tiscon.form.UserOrderForm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.*;
