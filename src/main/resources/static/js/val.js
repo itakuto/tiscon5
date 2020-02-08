@@ -113,24 +113,4 @@ $(function(){
         return false;
     }
   });
-  /*
-  $("form").on("keyup change", function(){
-    $("form").validate({
-        rules:{
-            box:{
-                required:true,
-                max:$cap,
-                number:true
-            }
-        },
-        message:{
-            box:{
-                required:"<br>*段ボールの個数が入力されていません",
-                max:"<br>*上記の荷物の場合、使えるダンボールの上限は"+$cap+"個です",
-                number:"<br>*半角数字で入力してください"
-            }
-        }
-    });
-  });
-  */
 });
