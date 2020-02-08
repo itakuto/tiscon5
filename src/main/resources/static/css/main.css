@@ -5,6 +5,10 @@ body {
     padding: 0;
     margin: 0;
 }
+form.cmxform label.error, label.error{
+  color: red;
+  font-weight: bold;
+}
 
 .jumbotron {
     background-repeat: no-repeat;
