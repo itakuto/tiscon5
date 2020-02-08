@@ -122,7 +122,6 @@ public class EstimateController {
     @PostMapping(value = "result", params = "calculation")
     String calculation(@Validated UserOrderForm userOrderForm, BindingResult result, Model model) {
         if (result.hasErrors()) {
-
             model.addAttribute("prefectures", estimateDAO.getAllPrefectures());
             model.addAttribute("userOrderForm", userOrderForm);
             return "confirm";
@@ -158,7 +157,13 @@ public class EstimateController {
 
         UserOrderDto dto = new UserOrderDto();
         BeanUtils.copyProperties(userOrderForm, dto);
-        estimateService.registerOrder(dto);
+        //追加部分
+        if(estimateDAO.checkDuplication(userOrderForm)){
+            estimateService.registerOrder(dto);
+        }else{
+            //　リクエストが重複した場合
+            System.out.println("Can't assign");
+        }
 
         return "complete";
     }

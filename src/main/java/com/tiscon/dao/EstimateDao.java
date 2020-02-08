@@ -1,12 +1,14 @@
 package com.tiscon.dao;
 
 import com.tiscon.domain.*;
+import com.tiscon.form.UserOrderForm;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.*;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
@@ -147,4 +149,28 @@ public class EstimateDao {
         SqlParameterSource paramSource = new MapSqlParameterSource("serviceId", serviceId);
         return parameterJdbcTemplate.queryForObject(sql, paramSource, Integer.class);
     }
+
+    public boolean checkDuplication(UserOrderForm userOrderForm) {
+        String sql = "SELECT OLD_ADDRESS FROM CUSTOMER WHERE CUSTOMER_NAME = :CustomerName";
+
+        SqlParameterSource paramSource = new MapSqlParameterSource("CustomerName", userOrderForm.getCustomerName());
+        List<String> ret;
+        try {
+            ret = parameterJdbcTemplate.queryForList(sql, paramSource, String.class);
+        }catch(Exception e){
+            e.printStackTrace();
+            return true;
+        }
+
+        boolean check = true;
+        for(int i = 0; i < ret.size(); ++i){
+            if(ret.get(i).equals(userOrderForm.getOldAddress())){
+                check = false;
+                break;
+            }
+        }
+
+        return check;
+    }
+
 }
