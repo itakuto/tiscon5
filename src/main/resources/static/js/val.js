@@ -1,4 +1,19 @@
 $(function(){
+  var $cap = 200 - $("#bed").val()*20 - $("#bicycle").val()*15 - $("#washingMachine").val()*10;
+  $("#bed, #bicycle, #washingMachine, #box").on("keyup change",function(){
+      $cap = 200 - $("#bed").val()*20 - $("#bicycle").val()*15 - $("#washingMachine").val()*10;
+      $("#box_max").text("（上記の荷物の場合の上限："+$cap+"個）");
+      if($cap < 0){
+        $("#box_cap").text("*上記の荷物は、トラック容量を超えているため、お見積りができません");
+        $("#box_max").text("");
+      }
+      else if($("#box").val() > $cap){
+        $("#box_cap").text("*上記の荷物の場合、使えるダンボールの上限は"+$cap+"個です");
+      }
+      else{
+        $("#box_cap").text("");
+      }
+  });
   $("form").validate({
     rules:{
       customerName:{
@@ -11,20 +26,29 @@ $(function(){
         required:true,
         email:true
       },
+      oldPost:{
+        number:true
+      },
       oldPrefectureId:{
         required:true
       },
       oldAddress:{
         required:true
       },
+      newPost:{
+        number:true
+      },
       newPrefectureId:{
-        required:true
+        required:true,
+        number:true
       },
       newAddress:{
         required:true
       },
       box:{
-        required:true
+        required:true,
+        //max:$cap,
+        number:true
       },
       bed:{
         required:true
@@ -47,11 +71,17 @@ $(function(){
         required:"<br>*メールアドレスが入力されていません",
         email:"<br>*Eメールの形式で入力して下さい"
       },
+      oldPost:{
+        number:"<br>*半角数字で入力してください"
+      },
       oldPrefectureId:{
         required:"<br>*転居元住所（都道府県）が入力されていません"
       },
       oldAddress:{
         required:"<br>*転居元住所（市区町村以下）が入力されていません"
+      },
+      newPost:{
+        number:"<br>*半角数字で入力してください"
       },
       newPrefectureId:{
         required:"<br>*転居先住所（都道府県）が入力されていません"
@@ -60,7 +90,9 @@ $(function(){
         required:"<br>*転居先住所（市区町村以下）が入力されていません"
       },
       box:{
-        required:"<br>*段ボールの個数が入力されていません"
+        required:"<br>*段ボールの個数が入力されていません",
+        //max:"<br>*上記の荷物の場合、使えるダンボールの上限は"+$cap+"個です",
+        number:"<br>*半角数字で入力してください"
       },
       bed:{
         required:"<br>*ベッドの個数が入力されていません"
@@ -76,10 +108,29 @@ $(function(){
         err.insertAfter(elem);
     }
   });
-  $("#box").change(function(){
-    var $cap = 200 - $("#bed").val()*20 + $("#bicycle").val()*15 +$("#washingMachine").val()*10;
-      if($("#box").val() > $cap){
-        $("#box_cap").text("*上記の荷物の場合、使えるダンボールの上限は"+$cap+"個です");
-      }
+  $("form").submit(function(){
+    if($("#box").val() > $cap){
+        return false;
+    }
   });
+  /*
+  $("form").on("keyup change", function(){
+    $("form").validate({
+        rules:{
+            box:{
+                required:true,
+                max:$cap,
+                number:true
+            }
+        },
+        message:{
+            box:{
+                required:"<br>*段ボールの個数が入力されていません",
+                max:"<br>*上記の荷物の場合、使えるダンボールの上限は"+$cap+"個です",
+                number:"<br>*半角数字で入力してください"
+            }
+        }
+    });
+  });
+  */
 });

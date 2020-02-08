@@ -35,7 +35,7 @@
         </div>
         <div class="form-group">
           <label for="oldPost">転居元住所（郵便番号）</label>
-          <input type="text" id="oldPost" name="oldPost" class="form-control" placeholder="例)000-0000" onKeyUp="AjaxZip3.zip2addr('oldPost', '', 'oldPrefectureId', 'oldAddress');" style="ime-inactive;"/>
+          <input type="text" id="oldPost" name="oldPost" class="form-control" placeholder="例)0000000（ハイフン無し）" onKeyUp="AjaxZip3.zip2addr('oldPost', '', 'oldPrefectureId', 'oldAddress');" style="ime-inactive;"/>
         </div>
         <div class="form-group">
           <label for="oldPrefectureId">転居元住所（都道府県）</label>
@@ -50,7 +50,7 @@
         </div>
         <div class="form-group">
           <label for="oldPost">転居元住所（郵便番号）</label>
-          <input type="text" id="newPost" name="newPost" class="form-control" placeholder="例)000-0000" onKeyUp="AjaxZip3.zip2addr('newPost', '', 'newPrefectureId', 'newAddress');" style="ime-inactive;"/>
+          <input type="text" id="newPost" name="newPost" class="form-control" placeholder="例)0000000（ハイフン無し）" onKeyUp="AjaxZip3.zip2addr('newPost', '', 'newPrefectureId', 'newAddress');" style="ime-inactive;"/>
         </div>
         <div class="form-group">
           <label for="newPrefectureId">転居先住所（都道府県）</label>
@@ -113,7 +113,7 @@
           <!--<input type="text" id="washingMachine" name="washingMachine" th:field="*{washingMachine}" class="form-control" placeholder="例）10（半角数字）"/>-->
         </div>
         <div class="form-group">
-          <label for="box">段ボールの個数</label>
+          <label for="box">段ボールの個数</label><a id="box_max"></a>
           <input type="text" id="box" name="box" th:field="*{box}" class="form-control" placeholder="例）10（半角数字）"/>
           <p id="box_cap"></p>
         </div>
