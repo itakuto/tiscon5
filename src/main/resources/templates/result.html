@@ -67,7 +67,9 @@
 <div class="container">
 
   <form th:action="@{/order}" th:object="${userOrderForm}" class="form-horizontal" method="post">
-
+    <div th:if="${existRequest}">
+      <h1><font color="red">申し込み済みです。</font></h1>
+    </div>
     <h1>概算お見積り結果</h1><br>
     <div class="col-sm-12">
       <p>

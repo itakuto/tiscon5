@@ -163,6 +163,11 @@ public class EstimateController {
         }else{
             //　リクエストが重複した場合
             System.out.println("Can't assign");
+            model.addAttribute("existRequest", 1);
+            model.addAttribute("prefectures", estimateDAO.getAllPrefectures());
+            model.addAttribute("userOrderForm", userOrderForm);
+            model.addAttribute("price", estimateService.getPrice(dto));
+            return "result";
         }
 
         return "complete";
