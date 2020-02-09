@@ -118,28 +118,33 @@ $(function(){
   var easy_price_min, easy_price_max, dis_min, dis_max;
   $("#check").click(function(){
     console.log("hogehoge");
-    switch($("#dis").val()){
-        case 0:
+    console.log($("#dis").val());
+    var i = $("#dis").val();
+    switch(i){
+        case "0":
+            console.log("hogeohoge");
             dis_min = 0;
             dis_max = 99;
             break;
-        case 1:
+        case "1":
             dis_min = 100;
             dis_max = 399;
             break;
-        case 2:
+        case "2":
             dis_min = 400;
             dis_max = 699;
             break;
-        case 3:
+        case "3":
             dis_min = 700;
             dis_max = 1500;
             break;
+        default :
+            console.log("hello");
     }
     console.log(dis_min);
     easy_price_min = dis_min*100 + 30000; //2トントラック3万円
     easy_price_max = dis_max*100 + 53000; //4トントラック5万円＋オプション3000円
-    if(("#month").val() == 0){
+    if($("#month").val() == 0){
         easy_price_min *= 1.8;
         easy_price_max *= 1.8; //引っ越しが多い時期の高騰
     }
