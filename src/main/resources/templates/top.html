@@ -16,7 +16,37 @@
       <div class="container">
         <h1 class="display-1">tiscon moving company</h1>
         <p class="bland-message">未来の景色に鮮やかな彩りを</p>
-        <a class="btn btn-primary btn-top" th:href="@{/input}" role="button">簡単無料見積もりをする</a><br><br>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>5秒見積もり！！</th>
+              <th>時期</th>
+              <th>距離</th>
+            <tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th></th>
+              <th>
+                <select class = "form-control" id = "month">
+                  <option value="0">繁盛期(2月～4月)</option>
+                  <option value="1">通常期(5月～1月)</option>
+                </select>
+              </th>
+              <th>
+                <select class = "form-control" id = "dis">
+                  <option value="0">近い(100km圏内)</option>
+                  <option value="1">普通(100km～400㎞圏内)</option>
+                  <option value="2">少し遠い(400km～700㎞圏内)</option>
+                  <option value="3">遠い(700㎞以上)</option>
+                </select>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-success" id="check" style="text-aline: right">簡単見積り！</button>
+        <textarea type="text" id="result" class="form-control" readonly></textarea>
+        <a class="btn btn-primary btn-top" th:href="@{/input}" role="button">もっと詳しく見積もりをする</a><br><br>
         <p><img src="../img/document_mitsumorisyo.png" style="width:120px"><img src="../img/mark_arrow_right.png" style="width:120px"><img src="../img/kaden_denwa.png" style="width:120px"></p>
       </div>
     </div>
