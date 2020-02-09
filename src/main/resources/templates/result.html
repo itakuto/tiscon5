@@ -33,7 +33,7 @@
       position: absolute;
       top: 50%;
       transform: translate(-50%,-50%);
-      width: 60%;
+      width: 40%;
     }
 
   </style>
@@ -71,12 +71,14 @@
     <h1>概算お見積り結果</h1><br>
     <div class="col-sm-12">
       <p>
-      <h1>　　<span th:text="${price}"></span>円</h1>
-        <div class="form-group">
-          <div class="text-center">
-            <button type="submit" name="complete" class="btn btn-result" style="float:right"><font size="6" color="#FFFFFF">詳細見積もり依頼</font></button>
-          </div>
+      <div class="form-group">
+        <div class="text-center">
+          <button type="submit" name="complete" class="btn btn-result" style="float:right"><font size="6" color="#FFFFFF">詳細見積もり依頼</font></button>
         </div>
+      </div>
+      <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; max-width: 320px; background-color:#FFFFFF">
+        <h1>　　<span th:text="${price}"></span>円</h1>
+      </div>
 
       </p>
 
