@@ -9,38 +9,79 @@
         href="http://fonts.googleapis.com/css?family=Exo:900"/>
   <link rel="stylesheet" th:href="@{/css/main.css}" href="../static/css/main.css">
   <style>
-    .popup{
+    .content{
+      margin: 0 auto;
+      padding: 40px;
     }
-    .popup .popuptext{
+    .modal{
+      display: none;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      width: 100%;
     }
-    .popup .popuptext::after{
+    .modal__bg{
+      background: rgba(0,0,0,0.8);
+      height: 100vh;
+      position: absolute;
+      width: 100%;
     }
-    .popup .show{
+    .modal__content{
+      background: #fff;
+      left: 50%;
+      padding: 40px;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      width: 60%;
     }
 
   </style>
 
   <script>
-    function popupShow(price){
-      window.alert('見積結果は'+　price + 'です。');
+    function modalOpen(){
+      $('.js-modal').fadeIn();
+      return false;
+    }
+
+    function modalClose(){
+      $('.js-modal').fadeOut();
+      return false;
     }
 
   </script>
 </head>
 
-<body>
+<body onload="modalOpen()">
+<div class="modal js-modal">
+  <div class="modal__bg js-modal-close"></div>
+  <div class="modal__content">
+    <p>
+      <h2>概算お見積り結果は</h2><br>
+        <h1>　　<span th:text="${price}"></span>円です。</h1>
+    </p>
+    <button onclick="modalClose()">閉じる</button>
+  </div>
+</div>
 <nav th:insert="header.html :: header"></nav>
 <div class="container">
 
   <form th:action="@{/order}" th:object="${userOrderForm}" class="form-horizontal" method="post">
+
     <h1>概算お見積り結果</h1><br>
     <div class="col-sm-12">
       <p>
-      <h2>概算お見積り結果は</h2><br>
-        <h1>　　<span th:text="${price}"></span>円</h1>
-     </p>
+      <h1>　　<span th:text="${price}"></span>円</h1>
+        <div class="form-group">
+          <div class="text-center">
+            <button type="submit" name="complete" class="btn btn-primary-result" style="float:right"><font size="6" color="#FFFFFF">詳細見積もり依頼</font></button>
+          </div>
+        </div>
+
+      </p>
+
       <br>
-      <h4>個人情報</h4>
+      <h3>個人情報</h3>
       <table class="table table-bordered">
         <col span="1" style="background-color: #A9B7C7;">
         <col span="2" style="background-color: #FFFFFF;">
@@ -86,16 +127,11 @@
         </tr>
         </tbody>
       </table>
-      <h4>荷物情報</h4>
+      <h3>荷物情報</h3>
       <table class="table table-bordered">
         <col span="1" style="background-color: #A9B7C7;">
         <col span="2" style="background-color: #FFFFFF;">
         <tbody>
-        <tr>
-          <th style="width: 40%">段ボールの個数</th>
-          <td><span th:text="*{box}"></span></td>
-          <input type="hidden" name="box" id="box" th:value="*{box}"/>
-        </tr>
         <tr>
           <th>ベッドの個数</th>
           <td><span th:text="*{bed}"></span></td>
@@ -110,6 +146,11 @@
           <th>洗濯機の個数</th>
           <td><span th:text="*{washingMachine}"></span></td>
           <input type="hidden" name="washingMachine" id="washingMachine" th:value="*{washingMachine}"/>
+        </tr>
+        <tr>
+          <th style="width: 40%">段ボールの個数</th>
+          <td><span th:text="*{box}"></span></td>
+          <input type="hidden" name="box" id="box" th:value="*{box}"/>
         </tr>
         <tr>
           <th>洗濯機の設置工事申し込み</th>
