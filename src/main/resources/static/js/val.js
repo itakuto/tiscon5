@@ -116,7 +116,8 @@ $(function(){
     }
   });
   var easy_price_min, easy_price_max, dis_min, dis_max;
-  $("#check").on("click",function(){
+  $("#check").click(function(){
+    console.log("hogehoge");
     switch($("#dis").val()){
         case 0:
             dis_min = 0;
@@ -135,6 +136,7 @@ $(function(){
             dis_max = 1500;
             break;
     }
+    console.log(dis_min);
     easy_price_min = dis_min*100 + 30000; //2トントラック3万円
     easy_price_max = dis_max*100 + 53000; //4トントラック5万円＋オプション3000円
     if(("#month").val() == 0){

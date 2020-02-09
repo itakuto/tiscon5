@@ -16,7 +16,7 @@
       <div class="container">
         <h1 class="display-1">tiscon moving company</h1>
         <p class="bland-message">未来の景色に鮮やかな彩りを</p>
-        <table class="table table-bordered">
+        <table class="table table-bordered" style="background-color = gray important">
           <thead>
             <tr>
               <th>5秒見積もり！！</th>
@@ -44,8 +44,9 @@
             </tr>
           </tbody>
         </table>
-        <button type="button" class="btn btn-success" id="check" style="text-aline: right">簡単見積り！</button>
-        <textarea type="text" id="result" class="form-control" readonly></textarea>
+
+        <button type="button" class="btn btn-success" style="text-aline: right" id="check">簡単見積り！</button>
+        <p type="text" id="result" class="form-control" readonly></p>
         <a class="btn btn-primary btn-top" th:href="@{/input}" role="button">もっと詳しく見積もりをする</a><br><br>
         <p><img src="../img/document_mitsumorisyo.png" style="width:120px"><img src="../img/mark_arrow_right.png" style="width:120px"><img src="../img/kaden_denwa.png" style="width:120px"></p>
       </div>
