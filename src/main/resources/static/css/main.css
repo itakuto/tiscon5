@@ -27,6 +27,12 @@ form.cmxform label.error, label.error, #box_cap{
     border-color: #FBC0AF;
 }
 
+.btn-result {
+    background: #FBC0AF;
+    border-color: #FBC0AF;
+    min-height: 100px;
+}
+
 .btn-top {
     width: 30%;
 }
