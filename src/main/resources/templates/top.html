@@ -16,14 +16,44 @@
       <div class="container">
         <h1 class="display-1">tiscon moving company</h1>
         <p class="bland-message">未来の景色に鮮やかな彩りを</p>
-        <a class="btn btn-primary btn-top" th:href="@{/input}" role="button">まずは簡単無料見積もり</a><br><br>
-        <!--
-        <p><img src="../img/document_mitsumorisyo.png" style="width:120px"><img src="../img/mark_arrow_right.png" style="width:120px"><img src="../img/kaden_denwa.png" style="width:120px"></p>
-        -->
+        <table class="table table-bordered" style="background-color = gray important">
+          <thead>
+            <tr>
+              <th>5秒見積もり！！</th>
+              <th>時期</th>
+              <th>距離</th>
+            <tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th></th>
+              <th>
+                <select class = "form-control" id = "month">
+                  <option value="0">繁盛期(2月～4月)</option>
+                  <option value="1">通常期(5月～1月)</option>
+                </select>
+              </th>
+              <th>
+                <select class = "form-control" id = "dis">
+                  <option value="0">近い(100km圏内)</option>
+                  <option value="1">普通(100km～400㎞圏内)</option>
+                  <option value="2">少し遠い(400km～700㎞圏内)</option>
+                  <option value="3">遠い(700㎞以上)</option>
+                </select>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+
+        <button type="button" class="btn btn-success" style="text-aline: right" id="check">簡単見積り！</button>
+        <p type="text" id="result" class="form-control" readonly></p>
+        <a class="btn btn-primary btn-top" th:href="@{/input}" role="button">もっと詳しく見積もりをする</a><br><br>
       </div>
     </div>
 <script src="../js/jquery-3.4.1.min.js" th:src="@{/js/jquery-3.4.1.min.js}"></script>
 <script src="../js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
 <script src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="../js/jquery.validate.min.js" th:src="@{/js/jquery.validate.min.js}"></script>
+<script type="text/javascript" src="../js/val.js" th:src="@{/js/val.js}"></script>
 </body>
 </html>

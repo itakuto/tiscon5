@@ -20,7 +20,8 @@ $(function(){
         required:true
       },
       tel:{
-        required:true
+        required:true,
+        number:true
       },
       email:{
         required:true,
@@ -65,7 +66,8 @@ $(function(){
         required:"<br>*氏名が入力されていません"
       },
       tel:{
-        required:"<br>*電話番号が入力されていません"
+        required:"<br>*電話番号が入力されていません",
+        number:"<br>*ハイフン無しの半角数字で入力して下さい"
       },
       email:{
         required:"<br>*メールアドレスが入力されていません",
@@ -81,7 +83,7 @@ $(function(){
         required:"<br>*転居元住所（市区町村以下）が入力されていません"
       },
       newPost:{
-        number:"<br>*半角数字で入力してください"
+        number:"<br>*ハイフン無しの半角数字で入力してください"
       },
       newPrefectureId:{
         required:"<br>*転居先住所（都道府県）が入力されていません"
@@ -113,5 +115,39 @@ $(function(){
         return false;
     }
   });
-
+  var easy_price_min, easy_price_max, dis_min, dis_max;
+  $("#check").click(function(){
+    console.log("hogehoge");
+    console.log($("#dis").val());
+    var i = $("#dis").val();
+    switch(i){
+        case "0":
+            console.log("hogeohoge");
+            dis_min = 0;
+            dis_max = 99;
+            break;
+        case "1":
+            dis_min = 100;
+            dis_max = 399;
+            break;
+        case "2":
+            dis_min = 400;
+            dis_max = 699;
+            break;
+        case "3":
+            dis_min = 700;
+            dis_max = 1500;
+            break;
+        default :
+            console.log("hello");
+    }
+    console.log(dis_min);
+    easy_price_min = dis_min*100 + 30000; //2トントラック3万円
+    easy_price_max = dis_max*100 + 53000; //4トントラック5万円＋オプション3000円
+    if($("#month").val() == 0){
+        easy_price_min *= 1.8;
+        easy_price_max *= 1.8; //引っ越しが多い時期の高騰
+    }
+    $("#result").text("お引越し費用は、"+easy_price_min+"～"+easy_price_max+"円です。");
+  });
 });
