@@ -9,6 +9,8 @@ form.cmxform label.error, label.error, #box_cap{
   color: red;
   font-weight: bold;
 }
+#result{
+}
 
 .jumbotron {
     background-repeat: no-repeat;
